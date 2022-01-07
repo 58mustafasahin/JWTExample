@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
+using System.IO;
+using System.Reflection;
 
 namespace JWTWebAPI
 {
@@ -30,9 +32,30 @@ namespace JWTWebAPI
         {
 
             services.AddControllers();
+            //  https://code-maze.com/swagger-ui-asp-net-core-web-api/
+            //  Build->Errors and warnings-> 1701;1702;1591
+            //  Output-> ✓ XML documentation file:
             services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JWTWebAPI", Version = "v1" });
+            { 
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JWTWebAPI", Version = "v1",
+                    Description = "An API to perform JWT operations",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Mustafa ŞAHİN",
+                        Email = "58.mustafasahin@gmail.com",
+                        Url = new Uri("https://github.com/58mustafasahin"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "JWT API LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
+                });
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
             //Adding Db context
             services.AddDbContext<JWTDbContext>();

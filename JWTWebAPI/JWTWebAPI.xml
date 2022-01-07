@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>JWTWebAPI</name>
+    </assembly>
+    <members>
+        <member name="M:JWTWebAPI.Controllers.AuthController.GetUserName">
+            <summary>
+                Get username service
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:JWTWebAPI.Controllers.AuthController.AddUser(JWTWebAPI.AddUserDto)">
+            <summary>
+                Adding user service
+            </summary>
+            <remarks>
+            Sample request: 
+                
+                POST api/Auth   
+                {        
+                    "name": "Mustafa",    
+                    "surname": "ŞAHİN",       
+                }
+            </remarks>
+            
+            <param name="addUserDto"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

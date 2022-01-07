@@ -47,7 +47,10 @@ namespace JWTWebAPI.Controllers
             var accessToken = await _authService.CreateAccessTokenAsync(currentUser);
             return Ok(accessToken);
         }
-
+        /// <summary>
+        ///     Get username service
+        /// </summary>
+        /// <returns></returns>
         [Authorize]
         [HttpGet]
         [Route("GetUserName")]
@@ -62,6 +65,28 @@ namespace JWTWebAPI.Controllers
         public ActionResult GetName()
         {
             return Ok("User role name");
+        }
+
+        /// <summary>
+        ///     Adding user service
+        /// </summary>
+        /// <remarks>
+        /// Sample request: 
+        ///     
+        ///     POST api/Auth   
+        ///     {        
+        ///         "name": "Mustafa",    
+        ///         "surname": "ŞAHİN",       
+        ///     }
+        /// </remarks>
+        /// 
+        /// <param name="addUserDto"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
+        public ActionResult AddUser(AddUserDto addUserDto)
+        {
+            return Ok("Adding is successful");
         }
     }
 }
